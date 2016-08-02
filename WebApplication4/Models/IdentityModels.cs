@@ -9,7 +9,10 @@ namespace WebApplication4.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        public decimal Balance { get; set; }
+        public decimal Balance { get; set; } //MOST IMPORTANT LINE - The definition of the Balance field attached to a User object
+        //ApplicationUser is saved to the database, so by adding this (public) Property here, the Entity Framework saves and loads it through UserManager
+        //See http://go.microsoft.com/fwlink/?LinkID=317594
+        //Also IdentiyConfig.cs
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

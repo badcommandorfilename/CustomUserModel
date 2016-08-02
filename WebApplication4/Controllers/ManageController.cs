@@ -64,9 +64,9 @@ namespace WebApplication4.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+            var model = new IndexViewModel //This is the bundle of data we will send to the View
             {
-                Balance = UserManager.FindById(userId).Balance,
+                Balance = UserManager.FindById(userId).Balance, //Set the Balance to the User's Balance
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),

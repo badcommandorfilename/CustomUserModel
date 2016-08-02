@@ -95,15 +95,17 @@ namespace WebApplication4.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        ///This is called when you submit the HTML form from Manage/Index
+        ///The "newBalance" argument gets bound to the input @Html.Editor("newBalance", new { @class = "form-control" })
         public async Task<ActionResult> SetBalance(decimal newBalance)
         {
             var userId = User.Identity.GetUserId();
-            var user = UserManager.FindById(userId);
-            user.Balance = newBalance;
-            var result = await UserManager.UpdateAsync(user);
+            var user = UserManager.FindById(userId); //User object from database
+            user.Balance = newBalance; //Make changes to the object in memory
+            var result = await UserManager.UpdateAsync(user); //Save changed object to database
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("Index", "Manage"); //Reload the page so that the number changes to the user
             }
             return View();
         }
